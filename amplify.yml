@@ -8,7 +8,6 @@ frontend:
     build:
       commands:
         - npm run build
-        - npm run dev
   artifacts:
     baseDirectory: dist
     files:
