@@ -62,6 +62,21 @@
     <template v-else>
       <DuelMode />
     </template>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p class="handwritten-desc">
+        Developed with ❤️ by <strong>Jimil Prabtani</strong> |
+        <a
+          href="https://github.com/JimilPrabtani/Github-finder/tree/master"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+        >
+          <i class="fab fa-github"></i> GitHub Repository
+        </a>
+      </p>
+    </footer>
   </div>
 </template>
 
@@ -141,6 +156,27 @@ header { text-align: center; margin-bottom: 32px; }
 
 .main-container {
   width: 100%; max-width: 880px; padding: 44px; z-index: 1;
+}
+
+.app-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px dashed rgba(128, 128, 128, 0.3);
+  text-align: center;
+}
+
+.footer-link {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-sketch);
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  background: var(--marker-yellow);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
