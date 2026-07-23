@@ -17,7 +17,7 @@
       <div class="logo-badge sketch-border">
         <i class="fab fa-github"></i>
       </div>
-      <h1 class="handwritten-title">GitHub User Finder <span class="doodle-sparkle">✨</span></h1>
+      <h1 class="handwritten-title">Gitfind - GitHub User Finder <span class="doodle-sparkle">✨</span></h1>
       <p class="handwritten-subtitle">
         Search developers, duel profiles, explore open-source projects, and discover
         <span class="highlight-yellow">AI & Tech hubs</span>!
