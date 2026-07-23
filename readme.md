@@ -1,6 +1,4 @@
-# Walkthrough — Full-Stack Hybrid Conversion
-
-The GitHub User Finder has been converted from a **plain HTML/CSS/JS app** into a production-grade **Vue 3 + Vite frontend** with a **Node.js/Express backend API proxy**.
+# Walkthrough — Full-Stack Structure
 
 ---
 
