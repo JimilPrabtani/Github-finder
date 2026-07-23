@@ -1,0 +1,23 @@
+// Language Color Palette Map — GitHub-style colors for programming languages
+export const LANG_COLORS = {
+  JavaScript: "#f1e05a",
+  TypeScript: "#3178c6",
+  Python: "#3572A5",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  "C#": "#178600",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Go: "#00ADD8",
+  Rust: "#dea584",
+  PHP: "#4F5D95",
+  Ruby: "#701516",
+  Shell: "#89e051",
+  Vue: "#41b883",
+  Kotlin: "#A97BFF",
+  Swift: "#F05138",
+  Dart: "#00B4AB",
+  Scala: "#c22d40",
+  Lua: "#000080",
+};

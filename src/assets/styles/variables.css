@@ -1,0 +1,46 @@
+/* ==========================================================================
+   CSS Custom Properties — Hand-Drawn Sketchbook Design Tokens
+   ========================================================================== */
+
+:root {
+  /* Light Sketchbook Theme (Default) */
+  --paper-bg: #fcfaf2;
+  --paper-card: #ffffff;
+  --ink-black: #23272a;
+  --ink-gray: #4b5563;
+
+  /* Highlighter Marker Colors */
+  --marker-yellow: #fef08a;
+  --marker-pink: #fbcfe8;
+  --marker-cyan: #a5f3fc;
+  --marker-purple: #e9d5ff;
+
+  --primary-color: #4f46e5;
+  --primary-dark: #3730a3;
+
+  /* Hand-Drawn Borders & Shadows */
+  --sketch-border: 3px solid var(--ink-black);
+  --sketch-shadow: 4px 5px 0px var(--ink-black);
+  --sketch-shadow-hover: 7px 8px 0px var(--ink-black);
+  --wobbly-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --wobbly-radius-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
+
+  /* Transitions */
+  --transition-sketch: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Dark Notebook Theme */
+:root[data-theme="dark"] {
+  --paper-bg: #12151e;
+  --paper-card: #1a1e2b;
+  --ink-black: #f8fafc;
+  --ink-gray: #cbd5e1;
+
+  --marker-yellow: #ca8a04;
+  --marker-pink: #be185d;
+  --marker-cyan: #0284c7;
+  --marker-purple: #7e22ce;
+
+  --primary-color: #818cf8;
+  --primary-dark: #6366f1;
+}

@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Global Hand-Drawn / Sketchbook Design System
+   ========================================================================== */
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--paper-bg);
+  color: var(--ink-black);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Sketchbook Graph Paper Grid */
+.sketch-grid {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-size: 24px 24px;
+  background-image:
+    linear-gradient(to right, rgba(128,128,128,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128,128,128,0.06) 1px, transparent 1px);
+  z-index: -1; pointer-events: none;
+}
+
+/* Floating Doodles */
+.doodle {
+  position: fixed; font-size: 2.2rem;
+  color: var(--ink-gray); opacity: 0.25;
+  user-select: none; pointer-events: none; z-index: 0;
+}
+.doodle-star-1 { top: 6%; left: 4%; transform: rotate(-15deg); font-size: 3rem; }
+.doodle-star-2 { bottom: 8%; right: 5%; transform: rotate(20deg); font-size: 2.8rem; }
+.doodle-circle-1 {
+  top: 55%; left: 2%; width: 50px; height: 50px;
+  border: 3px dashed var(--ink-gray); border-radius: 50%;
+}
+.doodle-squiggle-1 { bottom: 15%; left: 6%; font-size: 2.5rem; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+.handwritten-title { font-family: 'Caveat', cursive; font-size: 3.2rem; font-weight: 700; line-height: 1.1; color: var(--ink-black); }
+.handwritten-subtitle { font-family: 'Patrick Hand', cursive; font-size: 1.25rem; color: var(--ink-gray); margin-top: 6px; }
+.handwritten-heading { font-family: 'Kalam', cursive; font-size: 1.8rem; font-weight: 700; color: var(--ink-black); }
+.handwritten-desc { font-family: 'Patrick Hand', cursive; font-size: 1.15rem; color: var(--ink-gray); }
+.handwritten-bio { font-family: 'Patrick Hand', cursive; font-size: 1.2rem; color: var(--ink-black); }
+
+/* Marker Highlights */
+.highlight-yellow { background: var(--marker-yellow); padding: 2px 8px; border-radius: 4px; }
+.highlight-pink { background: var(--marker-pink); padding: 2px 8px; border-radius: 4px; }
+.highlight-cyan { background: var(--marker-cyan); padding: 2px 8px; border-radius: 4px; }
+
+.doodle-sparkle { display: inline-block; animation: doodleWiggle 2s infinite ease-in-out; }
+@keyframes doodleWiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(12deg) scale(1.15); }
+}
+
+@keyframes handDrawnFadeIn {
+  from { opacity: 0; transform: translateY(20px) rotate(-1deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* ==========================================================================
+   Core Card & Tape Components
+   ========================================================================== */
+.sketch-card {
+  background: var(--paper-card);
+  border: var(--sketch-border);
+  border-radius: var(--wobbly-radius);
+  box-shadow: var(--sketch-shadow);
+  position: relative;
+  transition: var(--transition-sketch);
+}
+
+.tape-strip {
+  position: absolute; width: 110px; height: 32px;
+  background: rgba(243,235,206,0.85);
+  border: 1px dashed rgba(0,0,0,0.15);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  z-index: 10;
+}
+.tape-top-left { top: -16px; left: 40px; transform: rotate(-4deg); }
+.tape-top-right { top: -16px; right: 40px; transform: rotate(3deg); }
+
+.card-tape {
+  position: absolute; top: -10px; left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px; height: 20px;
+  background: rgba(245,238,215,0.9);
+  border: 1px dashed rgba(0,0,0,0.1);
+}
+
+.tilt-left { transform: rotate(-1.2deg); }
+.tilt-right { transform: rotate(1.4deg); }
+.tilt-left:hover, .tilt-right:hover {
+  transform: scale(1.02) rotate(0deg);
+  box-shadow: var(--sketch-shadow-hover);
+  border-radius: var(--wobbly-radius-alt);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.sketch-button {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  font-family: 'Kalam', cursive; font-size: 1.15rem; font-weight: 700;
+  background: var(--marker-yellow); color: var(--ink-black);
+  border: var(--sketch-border); border-radius: var(--wobbly-radius);
+  box-shadow: 3px 3px 0px var(--ink-black);
+  cursor: pointer; transition: var(--transition-sketch);
+  text-decoration: none;
+}
+.sketch-button:hover { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 5px 5px 0px var(--ink-black); }
+.sketch-button:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0px var(--ink-black); }
+.btn-small { padding: 6px 14px; font-size: 0.95rem; }
+.btn-block { width: 100%; justify-content: center; }
+
+/* ==========================================================================
+   Search Box
+   ========================================================================== */
+.search-box {
+  display: flex; align-items: center;
+  background: var(--paper-card);
+  border: var(--sketch-border); border-radius: var(--wobbly-radius);
+  box-shadow: var(--sketch-shadow);
+  padding: 8px 8px 8px 20px; gap: 12px;
+  transition: var(--transition-sketch);
+}
+.search-box:focus-within { transform: scale(1.01) rotate(-0.5deg); box-shadow: var(--sketch-shadow-hover); }
+.search-icon { font-size: 1.2rem; color: var(--ink-black); }
+
+input[type="text"] {
+  flex: 1; background: transparent; border: none; outline: none;
+  font-family: 'Patrick Hand', cursive; font-size: 1.3rem; color: var(--ink-black);
+}
+input[type="text"]::placeholder { color: var(--ink-gray); }
+
+.sketch-select {
+  font-family: 'Kalam', cursive; font-size: 1rem; font-weight: 700;
+  padding: 6px 12px; background: var(--paper-card); color: var(--ink-black);
+  border: var(--sketch-border); border-radius: 12px;
+  outline: none; cursor: pointer; box-shadow: 2px 2px 0px var(--ink-black);
+}
+
+/* ==========================================================================
+   Modal Overlay
+   ========================================================================== */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000; padding: 20px;
+}
+.modal-card { width: 100%; max-width: 520px; max-height: 80vh; overflow-y: auto; padding: 30px; }
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 2px dashed rgba(128,128,128,0.3);
+}
+.close-btn { background: transparent; border: none; font-size: 2rem; color: var(--ink-black); cursor: pointer; line-height: 1; }
+
+/* Error State */
+.error-content {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 20px 24px; background: #fee2e2;
+  border: var(--sketch-border); border-radius: var(--wobbly-radius);
+  box-shadow: var(--sketch-shadow); color: #991b1b; font-size: 1.2rem;
+}
+:root[data-theme="dark"] .error-content { background: #450a0a; color: #fca5a5; }
+.error-icon { font-size: 1.6rem; }
+
+/* Utility */
+.text-yellow { color: #eab308; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-container { padding: 28px 18px; }
+  .handwritten-title { font-size: 2.5rem; }
+}
+@media (max-width: 600px) {
+  .tape-strip { width: 80px; height: 24px; }
+  .search-box { padding: 6px 6px 6px 14px; }
+  input[type="text"] { font-size: 1.1rem; }
+  .sketch-button { padding: 10px 16px; font-size: 1rem; }
+}
+@media (max-width: 400px) {
+  .sketch-button span { display: none; }
+  .sketch-button { padding: 10px 14px; }
+}
