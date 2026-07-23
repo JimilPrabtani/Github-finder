@@ -1,33 +1,18 @@
 version: 1
-applications:
-  # ── Vue 3 Frontend (Vite) ──
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm ci
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: dist
-        files:
-          - "**/*"
-      cache:
-        paths:
-          - node_modules/**/*
-
-  # ── Express Backend API ──
-  - backend:
-      phases:
-        preBuild:
-          commands:
-            - cd server
-            - npm ci
-        build:
-          commands:
-            - cd server
-      artifacts:
-        baseDirectory: server
-        files:
-          - "**/*"
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        - cd server && npm ci && cd ..
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - server/node_modules/**/*
