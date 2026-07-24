@@ -40,7 +40,7 @@ jobs:
         run: timeout 30 bash -c 'until curl -sf http://localhost:4173 >/dev/null; do sleep 1; done'
 
       - name: ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.14.0
+        uses: zaproxy/action-baseline@7c4deb10e6261301961c86d65d54a516394f9aed
         with:
           target: "http://localhost:4173"
           # -j: use the AJAX spider (headless browser) so the Vue SPA's
