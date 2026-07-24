@@ -21,7 +21,7 @@
   <div v-if="duelResult" class="duel-results-wrapper">
     <div class="duel-winner-banner sketch-card">
       <i class="fas fa-trophy trophy-icon"></i>
-      <h3 class="handwritten-title" v-html="winnerText"></h3>
+      <h3 class="handwritten-title" v-html="sanitizeHtml(winnerText)"></h3>
     </div>
     <div class="duel-cards-grid">
       <div v-for="(u, idx) in [duelResult.user1, duelResult.user2]" :key="u.login"
@@ -46,6 +46,7 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify';
 import { ref, computed } from "vue";
 import { useGithubApi } from "../composables/useGithubApi.js";
 
@@ -91,6 +92,15 @@ async function executeDuel() {
   } finally {
     loading.value = false;
   }
+}
+
+function sanitizeHtml(html) {
+  return html
+    ? DOMPurify.sanitize(html, {
+        ALLOWED_TAGS: ['span', 'p'],
+        ALLOWED_ATTR: ['class'],
+      })
+    : '';
 }
 </script>
 
