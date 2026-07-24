@@ -35,6 +35,8 @@ defineProps({
 .ai-icon { color: #db2777; }
 .sec-icon { color: #0284c7; }
 .dev-icon { color: #7c3aed; }
+.cert-icon { color: #16a34a; }
+.ops-icon { color: #0d9488; }
 .link-arrow { font-size: 0.95rem; color: var(--ink-gray); transition: var(--transition-sketch); }
 .resource-card:hover .link-arrow { color: var(--ink-black); transform: translate(3px, -3px); }
 

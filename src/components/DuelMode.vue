@@ -21,7 +21,10 @@
   <div v-if="duelResult" class="duel-results-wrapper">
     <div class="duel-winner-banner sketch-card">
       <i class="fas fa-trophy trophy-icon"></i>
-      <h3 class="handwritten-title" v-html="sanitizeHtml(winnerText)"></h3>
+      <h3 class="handwritten-title">
+        <template v-if="winner">🏆 Champion: <span class="highlight-pink">{{ winner }}</span> Wins!</template>
+        <template v-else>🤝 It's a Tie Battle!</template>
+      </h3>
     </div>
     <div class="duel-cards-grid">
       <div v-for="(u, idx) in [duelResult.user1, duelResult.user2]" :key="u.login"
@@ -46,7 +49,6 @@
 </template>
 
 <script setup>
-import DOMPurify from 'dompurify';
 import { ref, computed } from "vue";
 import { useGithubApi } from "../composables/useGithubApi.js";
 
@@ -68,12 +70,14 @@ const scores = computed(() => {
   return [calcScore(duelResult.value.user1), calcScore(duelResult.value.user2)];
 });
 
-const winnerText = computed(() => {
-  if (!duelResult.value) return "";
+// Login of the winning user, or null on a tie — rendered via plain
+// text interpolation, so no HTML sink is involved.
+const winner = computed(() => {
+  if (!duelResult.value) return null;
   const [s1, s2] = scores.value;
-  if (s1 > s2) return `🏆 Champion: <span class="highlight-pink">${duelResult.value.user1.login}</span> Wins!`;
-  if (s2 > s1) return `🏆 Champion: <span class="highlight-pink">${duelResult.value.user2.login}</span> Wins!`;
-  return `🤝 It's a Tie Battle!`;
+  if (s1 > s2) return duelResult.value.user1.login;
+  if (s2 > s1) return duelResult.value.user2.login;
+  return null;
 });
 
 async function executeDuel() {
@@ -92,15 +96,6 @@ async function executeDuel() {
   } finally {
     loading.value = false;
   }
-}
-
-function sanitizeHtml(html) {
-  return html
-    ? DOMPurify.sanitize(html, {
-        ALLOWED_TAGS: ['span', 'p'],
-        ALLOWED_ATTR: ['class'],
-      })
-    : '';
 }
 </script>
 

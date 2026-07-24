@@ -122,6 +122,8 @@ function filterResources(resources) {
 .badge-ai { background: var(--marker-pink); }
 .badge-security { background: var(--marker-cyan); }
 .badge-dev { background: var(--marker-yellow); }
+.badge-cert { background: var(--marker-purple); }
+.badge-devops { background: #bbf7d0; color: #14532d; }
 .resources-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px;
 }
