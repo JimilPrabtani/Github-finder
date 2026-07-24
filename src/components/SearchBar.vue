@@ -7,11 +7,12 @@
         type="text"
         placeholder="Type a GitHub username (e.g. octocat)..."
         autocomplete="off"
+        :disabled="loading"
         @keypress.enter="emitSearch"
       />
-      <button class="sketch-button" @click="emitSearch">
-        <span>Search!</span>
-        <i class="fas fa-pencil-alt"></i>
+      <button class="sketch-button" :disabled="loading" @click="emitSearch">
+        <span>{{ loading ? 'Searching...' : 'Search!' }}</span>
+        <i :class="loading ? 'fas fa-spinner fa-spin' : 'fas fa-pencil-alt'"></i>
       </button>
     </div>
   </div>
@@ -19,6 +20,10 @@
 
 <script setup>
 import { ref } from "vue";
+
+defineProps({
+  loading: { type: Boolean, default: false },
+});
 
 const emit = defineEmits(["search"]);
 const query = ref("");

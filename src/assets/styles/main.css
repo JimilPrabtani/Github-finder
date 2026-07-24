@@ -180,6 +180,15 @@ input[type="text"]::placeholder { color: var(--ink-gray); }
 :root[data-theme="dark"] .error-content { background: #450a0a; color: #fca5a5; }
 .error-icon { font-size: 1.6rem; }
 
+/* Loading State */
+.loading-content {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 20px 24px; background: var(--marker-cyan);
+  border: var(--sketch-border); border-radius: var(--wobbly-radius);
+  box-shadow: var(--sketch-shadow); color: var(--ink-black); font-size: 1.2rem;
+}
+.loading-icon { font-size: 1.6rem; }
+
 /* Utility */
 .text-yellow { color: #eab308; }
 

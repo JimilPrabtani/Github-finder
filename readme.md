@@ -59,7 +59,7 @@ Gitfind implements a **Full-Stack Hybrid Security Architecture** to keep secrets
 - **Styling**: Vanilla CSS3 Custom Properties (CSS Tokens, Hand-Drawn Wobbly Radius, Dynamic Theme Attributes)
 - **Backend API Proxy**: Node.js, Express.js
 - **Security Middleware**: Helmet, CORS (Domain Locking), Express Rate Limit
-- **Deployment**: AWS Amplify Hosting
+- **Deployment**: AWS Amplify Hosting with AWS WAF enabled and Monitoring with AWS Cloudtrail. 
 
 ---
 

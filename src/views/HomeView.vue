@@ -36,11 +36,17 @@
 
     <!-- Single Search Mode -->
     <template v-if="mode === 'single'">
-      <SearchBar @search="handleSearch" />
+      <SearchBar :loading="userStore.isLoading" @search="handleSearch" />
       <RecentSearches @search="handleSearch" />
 
+      <!-- Loading State -->
+      <div v-if="userStore.isLoading" class="loading-content sketch-border">
+        <i class="fas fa-pencil-alt fa-bounce loading-icon"></i>
+        <p class="handwritten-desc">Sketching the profile...</p>
+      </div>
+
       <!-- Profile Results -->
-      <template v-if="userStore.currentUser">
+      <template v-else-if="userStore.currentUser">
         <ProfileCard />
         <LanguageBreakdown :repos="userStore.currentRepos" />
         <ActivityStats :user="userStore.currentUser" />
@@ -110,12 +116,19 @@ async function handleSearch(username) {
     userStore.currentUser = userData;
     userStore.addRecentSearch(userData.login);
 
-    const reposData = await fetchRepos(userData.login);
-    userStore.currentRepos = reposData;
+    // Repos failing shouldn't wipe the whole profile — show it without repos
+    try {
+      userStore.currentRepos = await fetchRepos(userData.login);
+    } catch {
+      userStore.currentRepos = [];
+    }
   } catch (err) {
     userStore.currentUser = null;
     userStore.currentRepos = [];
-    userStore.errorMsg = "Oops! No GitHub user found. Double check the spelling!";
+    userStore.errorMsg =
+      err.message === "User not found"
+        ? "Oops! No GitHub user found. Double check the spelling!"
+        : "Couldn't reach GitHub right now — check your connection and try again!";
   } finally {
     userStore.isLoading = false;
   }
