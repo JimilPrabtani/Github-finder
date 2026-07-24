@@ -1,0 +1,37 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    # Weekly scan (Mon 02:30 UTC) to catch newly published query packs / CVE patterns
+    - cron: "30 2 * * 1"
+
+jobs:
+  analyze:
+    name: Analyze JavaScript / Vue
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to upload SARIF results to the repo's Security tab
+      security-events: write
+      contents: read
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          # Covers .js and the <script> blocks inside .vue SFCs
+          languages: javascript-typescript
+          # security-extended adds lower-severity/precision queries on top of the default suite
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"

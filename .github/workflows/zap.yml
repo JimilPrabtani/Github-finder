@@ -1,0 +1,51 @@
+name: ZAP Baseline Scan
+
+on:
+  pull_request:
+    branches: [master]
+  schedule:
+    # Weekly scan (Mon 03:30 UTC)
+    - cron: "30 3 * * 1"
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  zap-baseline:
+    name: DAST scan of built frontend
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Build frontend
+        run: |
+          npm ci
+          npm run build
+
+      # Serve the production build in the background; --host so the
+      # ZAP Docker container can reach it
+      - name: Serve preview build
+        run: npm run preview -- --host 0.0.0.0 --port 4173 &
+
+      - name: Wait for server to be ready
+        run: timeout 30 bash -c 'until curl -sf http://localhost:4173 >/dev/null; do sleep 1; done'
+
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: "http://localhost:4173"
+          # -j: use the AJAX spider (headless browser) so the Vue SPA's
+          # client-rendered routes are actually discovered
+          cmd_options: "-j"
+          # Report as workflow artifact only; don't auto-open GitHub issues
+          allow_issue_writing: false
+          artifact_name: zap-baseline-report
