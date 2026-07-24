@@ -3,6 +3,9 @@
 // The GitHub PAT is stored server-side only — never sent to the browser.
 
 require("dotenv").config();
+// Aikido Zen must load before express/http so it can instrument them.
+// Reads AIKIDO_TOKEN from env; AIKIDO_BLOCK=true enables blocking mode.
+require("@aikidosec/firewall");
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
